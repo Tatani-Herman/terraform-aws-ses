@@ -17,13 +17,13 @@ This Terraform module sets up an Amazon SES (Simple Email Service) identity, inc
 | Name | Version |
 |------|---------|
 | terraform | >= 1.3.9 |
-| aws | >= 5.70.0 |
+| aws | >= 4.64.0 |
 
 ## Providers
 
 | Name | Version |
 |------|---------|
-| aws | >= 5.70.0 |
+| aws | >= 4.64.0 |
 
 
 ## Resources
