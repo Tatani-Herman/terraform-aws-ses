@@ -82,7 +82,7 @@ data "aws_iam_policy_document" "sns_policy" {
 }
 
 resource "aws_sns_topic_subscription" "main" {
-  count     = var.bounce_complaint_remediation_topic != null ? 1 : 0
+  count     = var.bounce_complaint_remediation_topic != null && var.remediation_lambda != null ? 1 : 0
   topic_arn = var.bounce_complaint_remediation_topic
   protocol  = "lambda"
   endpoint  = var.remediation_lambda
@@ -123,8 +123,8 @@ resource "aws_cloudwatch_metric_alarm" "ses_bounce_rate_alarm" {
   evaluation_periods  = 1
   treat_missing_data  = "ignore"
 
-  ok_actions                = [var.ses_reputation_monitoring_topic]
-  alarm_actions             = [var.ses_reputation_monitoring_topic]
+  ok_actions                = var.ses_reputation_monitoring_topic != null ? [var.ses_reputation_monitoring_topic] : []
+  alarm_actions             = var.ses_reputation_monitoring_topic != null ? [var.ses_reputation_monitoring_topic] : []
   insufficient_data_actions = []
 }
 
